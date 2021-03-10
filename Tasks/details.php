@@ -1,7 +1,7 @@
 <?php
 
 //include ("index.php");
-include ("DbConnection.php");
+include ("dbConnection.php");
 
 
 $id = $_GET['id'];    // we get the id however we pass the 'id=' in parameter so it knows what to pic up by
@@ -19,7 +19,7 @@ if ($Result->num_rows > 0) {
     //the results of the query is being fectched by the function and put into records and then we echo that out
     while ($records=$Result->fetch_assoc()) {
 
-        echo"<a href=Delete.php?id=$records[id]>
+        echo"<a href=delete.php?id=$records[id]>
         <br/>TaskName: " . $records["Name"]. 
         "<br/>TaskDetails: ". $records["Details"].
         "<br/>
@@ -33,4 +33,4 @@ else {
     echo'No Records found';
 }
 
-$conn->close();
+$connect->close();

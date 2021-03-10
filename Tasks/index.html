@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+<body>
+
+
+    <div id="root">                                       <!--We use this for el as the main element-->
+
+        <input type="text" id="input" v-model="message">  <!--We use v-model for using direct data inside the child element-->
+
+        <p>What is your message then {{ message }}</p>    <!--We have to use this as well IF we want to use the data in a text instead of the tag itself-->
+
+        <ul>
+            <li v-for="name in names" v-text="name"></li> <!--without saying anything or much it did everything for me-->
+        </ul>
+
+        <h1>Adding task using Methods</h1>
+        <input type="text" v-model="NewName">  <!--NewName is empty on input so whatever is added take it to NewName-->
+        <button v-bind:title="title" type="button" v-on:click="addName" >Add name</button> <!--then the addName function is hit -->
+        <!--when the function hits its taking the value from input which lives in v-model data and 
+        then adds/pushes it to names which lives in data as well so thats how we append data to a list 
+        -->
+
+        <h1>All Tasks</h1>            <!--gotta go through all the tasks and give back to me -->
+        <li v-for="task in tasks" v-text="task.description"></li>  <!--the task in tasks is more like a variable see in v-text -->
+
+        <h2>Incomplete Tasks using Computed</h2>     <!--go through the tasks use the computed function and give where false-->
+        <li v-for="task in IncompleteTasks" v-text="task.description"></li>
+
+
+        <h3>This is our tasks created with components</h3>
+        <Task>Go to the Bank</Task>
+        <Task>Go to the Foodline</Task>
+
+
+        <h3>Task of components within components and data as 'function'</h3> <!--data components we cant equate it 
+        rather we have to return it like a function 
+        -->
+        <!--more like a function hey Alhamdulilah -->
+        <list></list>  
+        <!--returns list our list actually of custom Task for list of tasks -->
+
+        <h1>Component setup for reusablity</h1>
+
+        <message title="Down to one line" body="Reusabilty and clean and even data here from db so we can reuse multiple times"></message>
+       
+        
+        <!-- <div class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                  <p>Any other Bulma elements you want</p>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div> -->
+
+        <modal v-show="showModal" @close="showModal = false"></modal>  <!--showModal is set to false so on startup wont show-->
+
+        <button v-on:click="showModal = true">Show Modal</button>  <!--once pressed must show -->
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <script src="main.js"></script>
+    
+
+</body>
+</html>

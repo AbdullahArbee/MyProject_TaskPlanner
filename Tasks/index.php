@@ -1,6 +1,6 @@
 <?php echo 'Hello World';
 
-include ("DbConnection.php");
+include ("dbConnection.php");
 
 // we using $connect from the DbConnection Variable and putting that in $Result which is using that to 
 //connect and make a query as well as store the query
@@ -12,7 +12,7 @@ if ($Result->num_rows > 0) {
     //the results of the query is being fectched by the function and put into records and then we echo that out
     while ($records=$Result->fetch_assoc()) {
 
-        echo "<a href= Details.php?id=$records[id]>
+        echo "<a href= details.php?id=$records[id]>
         <br/>TaskName: " . $records["Name"]. 
         "<br/>TaskDetails: ". $records["Details"].
         "<br/>
@@ -26,12 +26,12 @@ else {
     echo'No Records found';
 }
 
-//$conn->close();
+$connect->close();
 
 
 
 
-echo"<form action='$_SERVER[PHP_SELF]' method='POST'>
+echo"<form action='create.php' method='POST'>
 
     <label for='Name'>Name:</label>
     <input type='text' id='Name' name='Name'>
@@ -44,15 +44,7 @@ echo"<form action='$_SERVER[PHP_SELF]' method='POST'>
 </form>
 ";
 
-echo"$_POST[Name]";
-echo"$_GET[id]";
 
-$Name = $_POST["Name"];
-$Details = $_POST["Details"];
-
-$connect->query("INSERT INTO tasks (Name, Details,IsComplete ) values ('$Name', '$Details',0)");   // our connect variable from dbconnection
-
-$conn->close();
 
 
 
